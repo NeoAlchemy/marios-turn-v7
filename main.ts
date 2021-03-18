@@ -58,7 +58,7 @@ function createMap () {
     scene.setTile(7, assets.image`pipeTopRight`, true)
     scene.setTile(4, assets.image`solidBlock`, true)
     scene.setTile(10, assets.image`door`, true)
-    scene.setTile(15, assets.image`blackBox`, true)
+    scene.setTile(15, assets.image`blackhole`, true)
     scene.setTile(5, assets.image`coin`, false)
     scene.setTile(2, assets.image`regularMushroom`, false)
 }
