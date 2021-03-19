@@ -18,49 +18,12 @@ function createCheepCheep (position: number) {
     true
     )
     createEnemy(cheepcheep, position, 30)
-    for (let index = 0; index < 100; index++) {
-        pause(2000)
-        reverseMove(cheepcheep)
-    }
 }
 function resetGame () {
     goomba.destroy()
     spiny.destroy()
     cheepcheep.destroy()
     buildLevel()
-}
-function createMap () {
-    scene.setBackgroundImage(assets.image`backgroundImage1`)
-    scene.setTileMap(mapList[0])
-    scene.setTile(14, assets.image`floor`, true)
-    scene.setTile(13, assets.image`questionBlock`, true)
-    scene.setTile(12, img`
-        2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 2 
-        2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 2 
-        2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 2 
-        f f f f f f f f f f f f f f f f 
-        2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-        2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-        2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-        f f f f f f f f f f f f f f f f 
-        2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 f 
-        2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 f 
-        2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 f 
-        f f f f f f f f f f f f f f f f 
-        2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-        2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-        2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-        f f f f f f f f f f f f f f f f 
-        `, true)
-    scene.setTile(8, assets.image`pipeBottomLeft`, true)
-    scene.setTile(9, assets.image`pipeBottomRight`, true)
-    scene.setTile(6, assets.image`pipeTopLeft`, true)
-    scene.setTile(7, assets.image`pipeTopRight`, true)
-    scene.setTile(4, assets.image`solidBlock`, true)
-    scene.setTile(10, assets.image`door`, true)
-    scene.setTile(15, assets.image`blackhole`, true)
-    scene.setTile(5, assets.image`coin`, false)
-    scene.setTile(2, assets.image`regularMushroom`, false)
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (mario.vy == 0) {
@@ -71,7 +34,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 controller.down.onEvent(ControllerButtonEvent.Released, function () {
     if (bigMario == 1) {
-        mario.setImage(assets.image`bigMarioDucking`)
+        mario.setImage(assets.image`bigMario`)
     }
 })
 function shrinkMario () {
@@ -79,10 +42,10 @@ function shrinkMario () {
     animation.runImageAnimation(
     mario,
     assets.animation`shrinkingMario`,
-    200,
+    100,
     true
     )
-    pause(500)
+    pause(1000)
     animation.stopAnimation(animation.AnimationTypes.All, mario)
 }
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -112,10 +75,11 @@ function createGoomba (position: number) {
     true
     )
     createEnemy(goomba, position, 104)
+    goomba.setBounceOnWall(true)
 }
 scene.onHitTile(SpriteKind.Player, 10, function (sprite) {
     level += 1
-    if (level > mapList.length) {
+    if (level >= mapList.length) {
         game.over(true, effects.confetti)
     } else {
         resetGame()
@@ -145,11 +109,9 @@ info.onCountdownEnd(function () {
     info.changeLifeBy(-1)
     resetGame()
 })
-scene.onHitTile(SpriteKind.Enemy, 9, function (sprite) {
-    reverseMove(sprite)
-})
 function buildLevel () {
-    createMap()
+    scene.setBackgroundImage(assets.image`backgroundImage1`)
+    scene.setTileMap(mapList[level])
     mario.setPosition(8, 85)
     mario.ay = 175
     info.startCountdown(120)
@@ -182,12 +144,9 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     }
     mario.setVelocity(50, 0)
 })
-scene.onHitTile(SpriteKind.Enemy, 4, function (sprite) {
-    reverseMove(sprite)
-})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.coin, function (sprite, otherSprite) {
     info.changeScoreBy(100)
-    otherSprite.destroy()
+    otherSprite.destroy(effects.warmRadial, 200)
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
     if (bigMario == 0) {
@@ -209,11 +168,8 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSp
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     if (bigMario == 1) {
-        mario.setImage(assets.image`bigMario`)
+        mario.setImage(assets.image`bigMarioDucking`)
     }
-})
-scene.onHitTile(SpriteKind.Enemy, 8, function (sprite) {
-    reverseMove(sprite)
 })
 info.onLifeZero(function () {
     game.over(false, effects.melt)
@@ -229,7 +185,7 @@ function createCoins () {
     }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
-    otherSprite.destroy(effects.warmRadial, 100)
+    otherSprite.destroy(effects.warmRadial, 200)
     mario.setImage(assets.image`bigMario`)
     bigMario = 1
     info.changeScoreBy(200)
@@ -248,6 +204,7 @@ function createSpiny (position: number) {
     true
     )
     createEnemy(spiny, position, 104)
+    spiny.setBounceOnWall(true)
 }
 function reverseMove (badGuy: Sprite) {
     badGuy.setVelocity(0 - badGuy.vx, 0)
@@ -265,5 +222,126 @@ let mario: Sprite = null
 mario = sprites.create(assets.image`marioStandingStill`, SpriteKind.Player)
 info.setLife(3)
 level = 0
-mapList = [assets.image`level1`, assets.image`level2`]
+mapList = [assets.image`level2`, assets.image`level1`]
+scene.setTile(14, assets.image`floor`, true)
+scene.setTile(13, assets.image`questionBlock`, true)
+scene.setTile(12, img`
+    2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 2 
+    2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 2 
+    2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 2 
+    f f f f f f f f f f f f f f f f 
+    2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
+    2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
+    2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
+    f f f f f f f f f f f f f f f f 
+    2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 f 
+    2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 f 
+    2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 f 
+    f f f f f f f f f f f f f f f f 
+    2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
+    2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
+    2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
+    f f f f f f f f f f f f f f f f 
+    `, true)
+scene.setTile(8, assets.image`pipeBottomLeft`, true)
+scene.setTile(9, assets.image`pipeBottomRight`, true)
+scene.setTile(6, assets.image`pipeTopLeft`, true)
+scene.setTile(7, assets.image`pipeTopRight`, true)
+scene.setTile(4, assets.image`solidBlock`, true)
+scene.setTile(10, assets.image`door`, true)
+scene.setTile(15, assets.image`blackhole`, true)
+scene.setTile(11, img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, false)
+scene.setTile(1, img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, false)
+scene.setTile(3, img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, false)
+scene.setTile(2, img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, false)
+scene.setTile(5, img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, false)
 buildLevel()
+forever(function () {
+    pause(2000)
+    reverseMove(cheepcheep)
+})
