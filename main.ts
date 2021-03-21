@@ -175,6 +175,7 @@ info.onLifeZero(function () {
     game.over(false, effects.melt)
 })
 scene.onHitTile(SpriteKind.Player, 15, function (sprite) {
+    info.changeLifeBy(-1)
     resetGame()
 })
 function createCoins () {

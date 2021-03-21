@@ -259,25 +259,6 @@ d d f f f f f f f f f f f 4 f f
 d f f f f f f f f f f f f f 4 f 
 f f f f f f f f f f f f f f f 4 
 `;
-            case "image55":
-            case "door":return img`
-. . . . . . . . . 5 4 1 a 5 . . 
-. . . . . . . . . 5 4 1 a 5 . . 
-. . . . . . . . . 5 4 1 a 5 . . 
-. . . . . . . . . 5 4 1 a 5 . . 
-. . . . . . . . . 5 4 1 a 5 . . 
-. . . . . . . . . 5 4 1 a 5 . . 
-. . . . . . . . . 5 4 1 a 5 . . 
-. . . . . . . . . 5 4 1 a 5 . . 
-. . . . . . . . . 5 4 1 a 5 . . 
-. . . . . . . . . 5 4 1 a 5 . . 
-. . . . . . . . . 5 4 1 a 5 . . 
-. . . . . . . . . 5 4 1 a 5 . . 
-. . . . . . . . . 5 4 1 a 5 . . 
-. . . . . . . . . 5 4 1 a 5 . . 
-. . . . . . . . . 5 4 1 a 5 . . 
-. . . . . . . . . 5 4 1 a 5 . . 
-`;
             case "image44":
             case "regularMushroom":return img`
 . . . . . . 4 4 4 4 . . . . . . 
@@ -551,17 +532,6 @@ dddd22222222dddd
 888888....888888
 888888....888888
 `;
-            case "image48":
-            case "level1":return img`
-. . . . . . . . . . a . . . . . . . 5 5 . . . . . . . . . . . a 
-. . . . 5 . . . . . a . . 5 5 . . . . . . . . . . . . . . . . a 
-. . . . . . . . . . a . . . . . . . . . . . . . . . . . . . . a 
-. . . . . . 6 7 . . a . . . . . . . . . . . . . . 5 . . . . . a 
-. . 6 7 . . 8 9 . . a . . . . . . . . . . . . . . . . . . . . a 
-. . 8 9 . . 8 9 . . a . . . . . . . . . . . . . 4 . 4 . . . . a 
-. . 8 9 . . 8 9 . . a . . . . . . . . . . . . 4 4 . 4 4 . . 4 a 
-e e e e e e e e e e e e e e e e e e e e e e e e e f e e e e e e 
-`;
             case "image4":return img`
 2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 2 
 2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 2 
@@ -681,41 +651,35 @@ e e e e e e e e e e e e e e e e e e e e e e e e e f e e e e e e
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `;
-            case "image7":return img`
-2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 2 
-2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 2 
-2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 2 
-f f f f f f f f f f f f f f f f 
-2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-f f f f f f f f f f f f f f f f 
-2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 f 
-2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 f 
-2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 f 
-f f f f f f f f f f f f f f f f 
-2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-f f f f f f f f f f f f f f f f 
+            case "image55":
+            case "door":return img`
+. . . . . . . . . . f f f f f f 
+. . . . . . . . . f f f f f f f 
+. . . . . . . . f f f f f f f f 
+. . . . . . . f f f f f f f f f 
+. . . . . . f f f f f f f f f f 
+. . . . . f f f f f f f f f f f 
+. . . . f f f f f f f f f f f f 
+. . . f f f f f f f f f f f f f 
+. . . f f f f f f f f f f f f f 
+. . . . f f f f f f f f f f f f 
+. . . . . f f f f f f f f f f f 
+. . . . . . f f f f f f f f f f 
+. . . . . . . f f f f f f f f f 
+. . . . . . . . f f f f f f f f 
+. . . . . . . . . f f f f f f f 
+. . . . . . . . . . f f f f f f 
 `;
-            case "image8":return img`
-2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 2 
-2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 2 
-2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 2 
-f f f f f f f f f f f f f f f f 
-2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-f f f f f f f f f f f f f f f f 
-2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 f 
-2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 f 
-2 2 2 2 2 2 2 f 2 2 2 2 2 2 2 f 
-f f f f f f f f f f f f f f f f 
-2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-2 2 2 f 2 2 2 2 2 2 2 f 2 2 2 2 
-f f f f f f f f f f f f f f f f 
+            case "image48":
+            case "level1":return img`
+. . . . . . . . . . . . . . . . . . 5 5 . . . . . . . . . . . a 
+. . . . 5 . . . . . . . . 5 5 . . . . . . . . . . . . . . . . a 
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . a 
+. . . . . . 6 7 . . . . . . . . . . . . . . . . . 5 . . . . . a 
+. . 6 7 . . 8 9 . . . . . . . . . . . . . . . . . . . . . . . a 
+. . 8 9 . . 8 9 . . . . . . . . . . . . . . . . 4 . 4 . . . . a 
+. . 8 9 . . 8 9 . . . . . . . . . . . . . . . 4 4 . 4 4 . . 4 a 
+e e e e e e e e e e e e e e e e e e e e e e e e e f e e e e e e 
 `;
         }
         return null;
