@@ -20,9 +20,9 @@ function createCheepCheep (position: number) {
     createEnemy(cheepcheep, position, 30)
 }
 function resetGame () {
-    goomba.destroy()
-    spiny.destroy()
-    cheepcheep.destroy()
+    tiles.destroySpritesOfKind(SpriteKind.coin)
+    tiles.destroySpritesOfKind(SpriteKind.Food)
+    tiles.destroySpritesOfKind(SpriteKind.Enemy)
     buildLevel()
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -211,9 +211,9 @@ function reverseMove (badGuy: Sprite) {
     badGuy.setVelocity(0 - badGuy.vx, 0)
 }
 let coins: Sprite = null
-let bigMario = 0
 let spiny: Sprite = null
 let goomba: Sprite = null
+let bigMario = 0
 let cheepcheep: Sprite = null
 let mushroom: Sprite = null
 let supriseBoxTiles: tiles.Tile[] = []
