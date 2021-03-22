@@ -1,6 +1,7 @@
 namespace SpriteKind {
     export const Box = SpriteKind.create()
     export const coin = SpriteKind.create()
+    export const CheapCheap = SpriteKind.create()
 }
 function createMushrooms () {
     supriseBoxTiles = scene.getTilesByType(2)
@@ -10,7 +11,7 @@ function createMushrooms () {
     }
 }
 function createCheepCheep (position: number) {
-    cheepcheep = sprites.create(assets.image`cheepCheep`, SpriteKind.Enemy)
+    cheepcheep = sprites.create(assets.image`cheepCheep`, SpriteKind.CheapCheap)
     animation.runImageAnimation(
     cheepcheep,
     assets.animation`cheepCheepFlying`,
@@ -18,11 +19,13 @@ function createCheepCheep (position: number) {
     true
     )
     createEnemy(cheepcheep, position, 30)
+    cheepcheep.setBounceOnWall(true)
 }
 function resetGame () {
     tiles.destroySpritesOfKind(SpriteKind.coin)
     tiles.destroySpritesOfKind(SpriteKind.Food)
     tiles.destroySpritesOfKind(SpriteKind.Enemy)
+    tiles.destroySpritesOfKind(SpriteKind.CheapCheap)
     buildLevel()
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -121,7 +124,11 @@ function buildLevel () {
     createGoomba(150)
     createSpiny(330)
     createCheepCheep(250)
+    createCheepCheep(400)
 }
+sprites.onOverlap(SpriteKind.CheapCheap, SpriteKind.Player, function (sprite, otherSprite) {
+    hitByEnemy(sprite, otherSprite)
+})
 function createEnemy (badGuy: Sprite, startingPosition: number, yPosition: number) {
     badGuy.setVelocity(50, 0)
     badGuy.setPosition(startingPosition, yPosition)
@@ -149,13 +156,21 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.coin, function (sprite, otherSpr
     otherSprite.destroy(effects.warmRadial, 200)
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
+    hitByEnemy(sprite, otherSprite)
+})
+controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (bigMario == 1) {
+        mario.setImage(assets.image`bigMarioDucking`)
+    }
+})
+function hitByEnemy (enemySprite: Sprite, playerSprite: Sprite) {
     if (bigMario == 0) {
-        if (sprite == spiny) {
+        if (enemySprite == spiny) {
             info.changeLifeBy(-1)
             resetGame()
         } else {
-            if (otherSprite.y < sprite.y) {
-                sprite.destroy(effects.fire, 500)
+            if (enemySprite.y > playerSprite.y) {
+                enemySprite.destroy(effects.fire, 500)
                 info.changeScoreBy(200)
             } else {
                 info.changeLifeBy(-1)
@@ -165,12 +180,7 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSp
     } else {
         shrinkMario()
     }
-})
-controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (bigMario == 1) {
-        mario.setImage(assets.image`bigMarioDucking`)
-    }
-})
+}
 info.onLifeZero(function () {
     game.over(false, effects.melt)
 })
@@ -344,5 +354,7 @@ scene.setTile(5, img`
 buildLevel()
 forever(function () {
     pause(2000)
-    reverseMove(cheepcheep)
+    for (let value of sprites.allOfKind(SpriteKind.CheapCheap)) {
+        reverseMove(value)
+    }
 })
