@@ -12,6 +12,36 @@ namespace SpriteKind {
     export const coin = SpriteKind.create()
     export const CheapCheap = SpriteKind.create()
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`1up`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`transparency16`)
+    info.changeLifeBy(1)
+})
+scene.onHitWall(SpriteKind.Player, function (sprite, location) {
+    if (mario.isHittingTile(CollisionDirection.Top)) {
+        if (tiles.tileAtLocationEquals(location, assets.tile`mushroomBlock`)) {
+            if (Math.percentChance(95)) {
+                tiles.setTileAt(tiles.getTileLocation(tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row) - 1), assets.tile`mushroom`)
+                tiles.setTileAt(location, assets.tile`surpriseBlockAfterHit`)
+            } else if (Math.percentChance(5)) {
+                tiles.setTileAt(tiles.getTileLocation(tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row) - 1), assets.tile`1up`)
+                tiles.setTileAt(location, assets.tile`surpriseBlockAfterHit`)
+            }
+        } else if (tiles.tileAtLocationEquals(location, assets.tile`coinBlock`)) {
+            coinBlock = sprites.create(assets.image`coin`, SpriteKind.coin)
+            animation.runImageAnimation(
+            coinBlock,
+            assets.animation`supriseCoin`,
+            100,
+            false
+            )
+            tiles.placeOnTile(coinBlock, tiles.getTileLocation(tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row) - 2))
+            info.changeScoreBy(200)
+            tiles.setTileAt(location, assets.tile`surpriseBlockAfterHit`)
+        } else {
+            scene.cameraShake(4, 100)
+        }
+    }
+})
 function createGame () {
     level = 0
     info.startCountdown(120)
@@ -35,6 +65,15 @@ function resetGame () {
     tiles.destroySpritesOfKind(SpriteKind.CheapCheap)
     buildLevel()
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, location) {
+    let mapList: number[] = []
+    level += 1
+    if (level >= mapList.length) {
+        game.over(true, effects.confetti)
+    } else {
+        resetGame()
+    }
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (mario.isHittingTile(CollisionDirection.Bottom)) {
         mario.vy = jumpHeight
@@ -397,15 +436,6 @@ function createGoomba (position: number) {
     createEnemy(goomba, position, 104)
     goomba.setBounceOnWall(true)
 }
-scene.onHitTile(SpriteKind.Player, 10, function (sprite) {
-    let mapList: number[] = []
-    level += 1
-    if (level >= mapList.length) {
-        game.over(true, effects.confetti)
-    } else {
-        resetGame()
-    }
-})
 controller.right.onEvent(ControllerButtonEvent.Released, function () {
     animation.stopAnimation(animation.AnimationTypes.All, mario)
     if (bigMario == 0) {
@@ -448,92 +478,7 @@ function animateCoins () {
         tiles.placeOnTile(coins, value)
         animation.runImageAnimation(
         coins,
-        [img`
-            . . . . . . 5 5 5 5 f f . . . . 
-            . . . . . 5 5 5 5 5 5 f f . . . 
-            . . . . . 5 5 4 4 5 5 f f . . . 
-            . . . . 5 5 4 5 5 f 5 5 f f . . 
-            . . . . 5 5 4 5 5 f 5 5 f f . . 
-            . . . . 5 5 4 5 5 f 5 5 f f . . 
-            . . . . 5 5 4 5 5 f 5 5 f f . . 
-            . . . . 5 5 4 5 5 f 5 5 f f . . 
-            . . . . 5 5 4 5 5 f 5 5 f f . . 
-            . . . . 5 5 4 5 5 f 5 5 f f . . 
-            . . . . 5 5 4 5 5 f 5 5 f f . . 
-            . . . . 5 5 4 5 5 f 5 5 f f . . 
-            . . . . 5 5 4 5 5 f 5 5 f f . . 
-            . . . . . 5 5 f f 5 5 f f . . . 
-            . . . . . 5 5 5 5 5 5 f f . . . 
-            . . . . . . 5 5 5 5 f f . . . . 
-            `,img`
-            . . . . . . . 5 4 . . . . . . . 
-            . . . . . . . 5 4 . . . . . . . 
-            . . . . . . 5 4 4 4 . . . . . . 
-            . . . . . . 5 4 4 4 . . . . . . 
-            . . . . . . 5 4 4 4 . . . . . . 
-            . . . . . . 5 4 4 4 . . . . . . 
-            . . . . . . 5 4 4 4 . . . . . . 
-            . . . . . . 1 4 4 4 . . . . . . 
-            . . . . . . 1 4 4 4 . . . . . . 
-            . . . . . . 5 4 4 4 . . . . . . 
-            . . . . . . 5 4 4 4 . . . . . . 
-            . . . . . . 5 4 4 4 . . . . . . 
-            . . . . . . 5 4 4 4 . . . . . . 
-            . . . . . . 5 4 4 4 . . . . . . 
-            . . . . . . . 5 4 . . . . . . . 
-            . . . . . . . 5 4 . . . . . . . 
-            `,img`
-            . . . . . . . . 5 . . . . . . . 
-            . . . . . . . . 5 . . . . . . . 
-            . . . . . . . . 5 . . . . . . . 
-            . . . . . . . . 5 . . . . . . . 
-            . . . . . . . . 5 . . . . . . . 
-            . . . . . . . . 5 . . . . . . . 
-            . . . . . . . . 1 . . . . . . . 
-            . . . . . . . . 1 . . . . . . . 
-            . . . . . . . . 5 . . . . . . . 
-            . . . . . . . . 5 . . . . . . . 
-            . . . . . . . . 5 . . . . . . . 
-            . . . . . . . . 5 . . . . . . . 
-            . . . . . . . . 5 . . . . . . . 
-            . . . . . . . . 5 . . . . . . . 
-            . . . . . . . . 5 . . . . . . . 
-            . . . . . . . . 5 . . . . . . . 
-            `,img`
-            . . . . . . . 1 4 . . . . . . . 
-            . . . . . . . 1 4 . . . . . . . 
-            . . . . . . 1 1 1 4 . . . . . . 
-            . . . . . . 1 1 1 4 . . . . . . 
-            . . . . . . 1 1 1 4 . . . . . . 
-            . . . . . . 1 1 1 4 . . . . . . 
-            . . . . . . 1 1 1 4 . . . . . . 
-            . . . . . . 1 1 1 4 . . . . . . 
-            . . . . . . 1 1 1 4 . . . . . . 
-            . . . . . . 1 1 1 4 . . . . . . 
-            . . . . . . 1 1 1 4 . . . . . . 
-            . . . . . . 1 1 1 4 . . . . . . 
-            . . . . . . 1 1 1 4 . . . . . . 
-            . . . . . . 1 1 1 4 . . . . . . 
-            . . . . . . . 1 4 . . . . . . . 
-            . . . . . . . 1 4 . . . . . . . 
-            `,img`
-            . . . . . . . 5 5 . . . . . . . 
-            . . . . . . 5 5 5 5 . . . . . . 
-            . . . . . 5 5 5 5 5 5 . . . . . 
-            . . . . . 5 5 1 4 5 5 . . . . . 
-            . . . . 5 5 1 5 5 4 5 . . . . . 
-            . . . . 5 5 1 5 5 4 5 5 . . . . 
-            . . . . 5 5 1 5 5 4 5 5 . . . . 
-            . . . . 5 5 1 5 5 4 5 5 . . . . 
-            . . . . 5 5 1 5 5 4 5 5 . . . . 
-            . . . . 5 5 1 5 5 4 5 5 . . . . 
-            . . . . 5 5 1 5 5 4 5 5 . . . . 
-            . . . . 5 5 1 5 5 4 5 5 . . . . 
-            . . . . . 5 5 1 4 5 5 . . . . . 
-            . . . . . 5 5 5 5 5 5 . . . . . 
-            . . . . . . 5 5 5 5 . . . . . . 
-            . . . . . . . 5 5 . . . . . . . 
-            `],
+        assets.animation`fullCoin`,
         200,
         true
         )
@@ -589,9 +534,6 @@ scene.onHitTile(SpriteKind.Player, 15, function (sprite) {
     info.changeLifeBy(-1)
     resetGame()
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
-    otherSprite.destroy(effects.warmRadial, 200)
-})
 function createPlayer (player2: Sprite) {
     bigMario = 0
     player2.ay = gravity
@@ -599,11 +541,6 @@ function createPlayer (player2: Sprite) {
     scene.cameraFollowSprite(player2)
     animateRun()
 }
-scene.onHitTile(SpriteKind.Player, 12, function (sprite) {
-    if (mario.isHittingTile(CollisionDirection.Top)) {
-        scene.cameraShake(4, 100)
-    }
-})
 function createSpiny (position: number) {
     spiny = sprites.create(assets.image`spinyStandingStill`, SpriteKind.Enemy)
     animation.runImageAnimation(
@@ -640,6 +577,7 @@ let smallMarioRunLeft: animation.Animation = null
 let bigMarioRunLeft: animation.Animation = null
 let cheepcheep: Sprite = null
 let level = 0
+let coinBlock: Sprite = null
 let mario: Sprite = null
 let jumpHeight = 0
 let walkingSpeed = 0
