@@ -5,7 +5,8 @@
         "device": "*",
         "animation": "*",
         "color-coded-tilemap": "*",
-        "tilemaps": "github:microsoft/pxt-tilemaps#v1.11.0"
+        "tilemaps": "github:microsoft/pxt-tilemaps#v1.11.0",
+        "corgio": "*"
     },
     "files": [
         "main.blocks",
@@ -20,7 +21,7 @@
         "test.ts"
     ],
     "targetVersions": {
-        "target": "1.4.27",
+        "target": "1.4.28",
         "targetId": "arcade"
     },
     "supportedTargets": [
