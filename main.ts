@@ -12,8 +12,10 @@ namespace SpriteKind {
     export const coin = SpriteKind.create()
     export const CheapCheap = SpriteKind.create()
     export const brick = SpriteKind.create()
+    export const Goomba = SpriteKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`1up`, function (sprite, location) {
+    music.magicWand.play()
     tiles.setTileAt(location, assets.tile`transparency16`)
     info.changeLifeBy(1)
 })
@@ -28,6 +30,7 @@ scene.onHitWall(SpriteKind.Player, function (sprite, location) {
                 tiles.setTileAt(location, assets.tile`surpriseBlockAfterHit`)
             }
         } else if (tiles.tileAtLocationEquals(location, assets.tile`coinBlock`)) {
+            music.baDing.play()
             coinBlock = sprites.create(assets.image`coin`, SpriteKind.coin)
             animation.runImageAnimation(
             coinBlock,
@@ -40,6 +43,7 @@ scene.onHitWall(SpriteKind.Player, function (sprite, location) {
             tiles.setTileAt(location, assets.tile`surpriseBlockAfterHit`)
         } else if (tiles.tileAtLocationEquals(location, assets.tile`myTile0`)) {
             if (bigMario == 1) {
+                music.bigCrash.play()
                 brickBlockExploding = sprites.create(assets.tile`myTile0`, SpriteKind.brick)
                 info.changeScoreBy(50)
                 animation.runImageAnimation(
@@ -57,6 +61,12 @@ scene.onHitWall(SpriteKind.Player, function (sprite, location) {
             scene.cameraShake(4, 100)
         }
     }
+})
+sprites.onOverlap(SpriteKind.Goomba, SpriteKind.Player, function (sprite, otherSprite) {
+    if (sprite.y > otherSprite.y) {
+        sprite.setImage(assets.image`squishedGoomba`)
+    }
+    hitByEnemy(sprite, otherSprite)
 })
 function createGame () {
     level = 0
@@ -83,6 +93,7 @@ function resetGame () {
     tiles.destroySpritesOfKind(SpriteKind.Food)
     tiles.destroySpritesOfKind(SpriteKind.Enemy)
     tiles.destroySpritesOfKind(SpriteKind.CheapCheap)
+    tiles.destroySpritesOfKind(SpriteKind.Goomba)
     buildLevel()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, location) {
@@ -451,7 +462,7 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 function createGoomba () {
     for (let value of tiles.getTilesByType(assets.tile`myTile3`)) {
-        goomba = sprites.create(assets.image`goombaStill`, SpriteKind.Enemy)
+        goomba = sprites.create(assets.image`goombaStill`, SpriteKind.Goomba)
         animation.runImageAnimation(
         goomba,
         assets.animation`Goomba`,
@@ -497,6 +508,7 @@ function buildLevel () {
     createTurtle()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`mushroom`, function (sprite, location) {
+    music.powerUp.play()
     tiles.setTileAt(location, assets.tile`transparency16`)
     mario.setImage(assets.image`bigMario`)
     bigMario = 1
@@ -527,6 +539,7 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     mario.vx = walkingSpeed
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.coin, function (sprite, otherSprite) {
+    music.baDing.play()
     info.changeScoreBy(100)
     otherSprite.destroy(effects.warmRadial, 100)
 })
