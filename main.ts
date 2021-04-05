@@ -99,6 +99,10 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         mario.vy = jumpHeight
     }
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, location) {
+    info.changeLifeBy(-1)
+    resetGame()
+})
 function animateRun () {
     bigMarioRunLeft = animation.createAnimation(ActionKind.BigWalkingLeft, 100)
     animation.attachAnimation(mario, bigMarioRunLeft)
@@ -483,6 +487,7 @@ info.onCountdownEnd(function () {
     resetGame()
 })
 function buildLevel () {
+    mario.setPosition(20, 40)
     scene.setBackgroundImage(assets.image`backgroundImage1`)
     tiles.setTilemap(tilemap`level7`)
     animateCoins()
@@ -553,10 +558,6 @@ function hitByEnemy (enemySprite: Sprite, playerSprite: Sprite) {
 }
 info.onLifeZero(function () {
     game.over(false, effects.melt)
-})
-scene.onHitTile(SpriteKind.Player, 15, function (sprite) {
-    info.changeLifeBy(-1)
-    resetGame()
 })
 function createPlayer (player2: Sprite) {
     bigMario = 0
