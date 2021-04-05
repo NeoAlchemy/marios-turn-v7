@@ -11,6 +11,7 @@ namespace SpriteKind {
     export const Box = SpriteKind.create()
     export const coin = SpriteKind.create()
     export const CheapCheap = SpriteKind.create()
+    export const brick = SpriteKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`1up`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`transparency16`)
@@ -37,6 +38,21 @@ scene.onHitWall(SpriteKind.Player, function (sprite, location) {
             tiles.placeOnTile(coinBlock, tiles.getTileLocation(tiles.locationXY(location, tiles.XY.column), tiles.locationXY(location, tiles.XY.row) - 2))
             info.changeScoreBy(200)
             tiles.setTileAt(location, assets.tile`surpriseBlockAfterHit`)
+        } else if (tiles.tileAtLocationEquals(location, assets.tile`myTile0`)) {
+            if (bigMario == 1) {
+                brickBlockExploding = sprites.create(assets.tile`myTile0`, SpriteKind.brick)
+                info.changeScoreBy(50)
+                animation.runImageAnimation(
+                brickBlockExploding,
+                assets.animation`explodingBrickAnim`,
+                100,
+                false
+                )
+                tiles.placeOnTile(brickBlockExploding, tiles.getTileLocation(tiles.locationXY(location, tiles.XY.column) - 1, tiles.locationXY(location, tiles.XY.row) - 1))
+                tiles.setTileAt(location, assets.tile`transparency16`)
+            } else {
+                scene.cameraShake(4, 100)
+            }
         } else {
             scene.cameraShake(4, 100)
         }
@@ -570,13 +586,14 @@ let turtle: Sprite = null
 let spiny: Sprite = null
 let coins: Sprite = null
 let goomba: Sprite = null
-let bigMario = 0
 let smallMarioRunRight: animation.Animation = null
 let bigMarioRunRight: animation.Animation = null
 let smallMarioRunLeft: animation.Animation = null
 let bigMarioRunLeft: animation.Animation = null
 let cheepcheep: Sprite = null
 let level = 0
+let brickBlockExploding: Sprite = null
+let bigMario = 0
 let coinBlock: Sprite = null
 let mario: Sprite = null
 let jumpHeight = 0

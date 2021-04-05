@@ -4,12 +4,6 @@
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true
     },
-    "tile2": {
-        "data": "hwQQABAAAAAi8iLyIvIi8iLyIvIi8iLyIvIi8iLyIvIi8v//IvL//yLyIvIi8iLyIvIi8iLyIvIi8iLyIvIi8v//IvL//yLyIvIi8iLyIvIi8iLyIvIi8iLyIvIi8iLyIvL//yLy//8i8iLyIvIi8iLyIvIi8iLyIvIi8iLyIvIi8iLy//8i8g==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true,
-        "displayName": "myTile0"
-    },
     "tile4": {
         "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAA//////////9VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVEREREREREREREREREREREVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUREREREREREVVVVVVVVVVVVVVVVVVVVVQ==",
         "mimeType": "image/x-mkcd-f4",
@@ -87,6 +81,12 @@
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true,
         "displayName": "coinBlock"
+    },
+    "tile2": {
+        "data": "hwQQABAAAAAi8iLyIvIi8iLyIvIi8iLyIvIi8iLyIvIi8v//IvL//yLyIvIi8iLyIvIi8iLyIvIi8iLyIvIi8v//IvL//yLyIvIi8iLyIvIi8iLyIvIi8iLyIvIi8iLyIvL//yLy//8i8iLyIvIi8iLyIvIi8iLyIvIi8iLyIvIi8iLy//8i8g==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "myTile0"
     },
     "level7": {
         "id": "level7",
