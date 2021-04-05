@@ -63,16 +63,20 @@ function createGame () {
     info.startCountdown(120)
     buildLevel()
 }
-function createCheepCheep (position: number) {
-    cheepcheep = sprites.create(assets.image`cheepCheep`, SpriteKind.CheapCheap)
-    animation.runImageAnimation(
-    cheepcheep,
-    assets.animation`cheepCheepFlying`,
-    200,
-    true
-    )
-    createEnemy(cheepcheep, position, 30)
-    cheepcheep.setBounceOnWall(true)
+function createCheepCheep () {
+    for (let value of tiles.getTilesByType(assets.tile`myTile4`)) {
+        cheepcheep = sprites.create(assets.image`cheepCheep`, SpriteKind.CheapCheap)
+        animation.runImageAnimation(
+        cheepcheep,
+        assets.animation`cheepCheepFlying`,
+        200,
+        true
+        )
+        cheepcheep.setVelocity(50, 0)
+        tiles.placeOnTile(cheepcheep, value)
+        cheepcheep.setBounceOnWall(true)
+    }
+    tiles.replaceAllTiles(assets.tile`myTile4`, assets.tile`transparency16`)
 }
 function resetGame () {
     tiles.destroySpritesOfKind(SpriteKind.coin)
@@ -441,16 +445,20 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     }
     mario.vx = 0 - walkingSpeed
 })
-function createGoomba (position: number) {
-    goomba = sprites.create(assets.image`goombaStill`, SpriteKind.Enemy)
-    animation.runImageAnimation(
-    goomba,
-    assets.animation`Goomba`,
-    200,
-    true
-    )
-    createEnemy(goomba, position, 104)
-    goomba.setBounceOnWall(true)
+function createGoomba () {
+    for (let value of tiles.getTilesByType(assets.tile`myTile3`)) {
+        goomba = sprites.create(assets.image`goombaStill`, SpriteKind.Enemy)
+        animation.runImageAnimation(
+        goomba,
+        assets.animation`Goomba`,
+        200,
+        true
+        )
+        goomba.setVelocity(50, 0)
+        tiles.placeOnTile(goomba, value)
+        goomba.setBounceOnWall(true)
+    }
+    tiles.replaceAllTiles(assets.tile`myTile3`, assets.tile`transparency16`)
 }
 controller.right.onEvent(ControllerButtonEvent.Released, function () {
     animation.stopAnimation(animation.AnimationTypes.All, mario)
@@ -478,6 +486,10 @@ function buildLevel () {
     scene.setBackgroundImage(assets.image`backgroundImage1`)
     tiles.setTilemap(tilemap`level7`)
     animateCoins()
+    createGoomba()
+    createCheepCheep()
+    createSpiny()
+    createTurtle()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`mushroom`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`transparency16`)
@@ -500,10 +512,6 @@ function animateCoins () {
         )
     }
     tiles.replaceAllTiles(assets.tile`myTile1`, assets.tile`transparency16`)
-}
-function createEnemy (badGuy: Sprite, startingPosition: number, yPosition: number) {
-    badGuy.setVelocity(50, 0)
-    badGuy.setPosition(startingPosition, yPosition)
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (bigMario == 0) {
@@ -557,27 +565,35 @@ function createPlayer (player2: Sprite) {
     scene.cameraFollowSprite(player2)
     animateRun()
 }
-function createSpiny (position: number) {
-    spiny = sprites.create(assets.image`spinyStandingStill`, SpriteKind.Enemy)
-    animation.runImageAnimation(
-    spiny,
-    assets.animation`spinyWalking`,
-    200,
-    true
-    )
-    createEnemy(spiny, position, 104)
-    spiny.setBounceOnWall(true)
+function createSpiny () {
+    for (let value of tiles.getTilesByType(assets.tile`myTile5`)) {
+        spiny = sprites.create(assets.image`spinyStandingStill`, SpriteKind.Enemy)
+        animation.runImageAnimation(
+        spiny,
+        assets.animation`spinyWalking`,
+        200,
+        true
+        )
+        spiny.setVelocity(50, 0)
+        tiles.placeOnTile(spiny, value)
+        spiny.setBounceOnWall(true)
+    }
+    tiles.replaceAllTiles(assets.tile`myTile5`, assets.tile`transparency16`)
 }
-function createTurtle (position: number) {
-    turtle = sprites.create(assets.image`turtleStill`, SpriteKind.Enemy)
-    animation.runImageAnimation(
-    turtle,
-    assets.animation`turtle`,
-    200,
-    true
-    )
-    createEnemy(turtle, position, 104)
-    turtle.setBounceOnWall(true)
+function createTurtle () {
+    for (let value of tiles.getTilesByType(assets.tile`myTile6`)) {
+        turtle = sprites.create(assets.image`turtleStill`, SpriteKind.Enemy)
+        animation.runImageAnimation(
+        turtle,
+        assets.animation`turtle`,
+        200,
+        true
+        )
+        turtle.setVelocity(50, 0)
+        tiles.placeOnTile(turtle, value)
+        turtle.setBounceOnWall(true)
+    }
+    tiles.replaceAllTiles(assets.tile`myTile6`, assets.tile`transparency16`)
 }
 function reverseMove (badGuy: Sprite) {
     badGuy.setVelocity(0 - badGuy.vx, 0)

@@ -14,35 +14,10 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "questionBlock"
     },
-    "image50": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAA//////////9VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVEREREREREREREREREREREVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUREREREREREVVVVVVVVVVVVVVVVVVVVVQ==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "pipeBottomLeft"
-    },
-    "image51": {
-        "data": "hwQQABAAAABERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERUVFRUVFRUVUVFRUVFRUVEVFRUVFRUVFVVVVVVVVVVVVVVVVVVVVVf//////////AAAAAAAAAAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "pipeBottomRight"
-    },
-    "image52": {
-        "data": "hwQQABAAAAD//////////19UVVVVVVX/X1RVVVVVVf9fVFVVVVVV/19ERERERET/X0RERERERP9fVVVVVVVV/19VVVVVVVX/X1VVVVVVVf9fVVVVVVVV/19VVVVVVVX/X0RERERERP9fVFVVVVVV/19UVVVVVVX/X0RERERERP9fRERERERE/w==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "pipeTopLeft"
-    },
-    "image53": {
-        "data": "hwQQABAAAABfRERERERE/19ERERERET/X0RERERERP9fRERERERE/19ERERERET/X0RERERERP9fRERERERE/19ERERERET/X0RERERERP9fVFRUVFRU/19ERUVFRUX/X1RUVFRUVP9fREVFRUVF/19UVVVVVVX/X1RVVVVVVQD/////////AA==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "pipeTopRight"
-    },
     "image54": {
         "data": "hwQQABAAAADU3d3d3d3d/U3d3d3d3d3/3dTd3d3d/f/dTd3d3d3//93dRERERP//3d1ERERE///d3URERET//93dRERERP//3d1ERERE///d3URERET//93dRERERP//3d1ERERE///d/f/////0/93//////0///f////////T/////////Tw==",
         "mimeType": "image/x-mkcd-f4",
         "displayName": "solidBlock"
-    },
-    "image44": {
-        "data": "hwQQABAAAAAAAABEREQAAAAAQCJCJAAAAAAkIiIkAAAAQCQiIiQRAQBEJCIiFBERQEREIkIUERFERERERBQREUREREREFBERRCJCREQUEREkIkJERBQRQSAiQkREFEEUACJCREQUEREAIEIkQiQRAQAARCQiJAAAAABABCJEAAAAAABARAQAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "regularMushroom"
     },
     "image38": {
         "data": "hwQQABAAAAAAAAAAgN0NgACAiACI3Q2IINiNgIjYIogiiNiNiCIiiCLY2C0iLSIAIt3djSgiAgAi3d2NKCICACKIjY0iLSIAIN2IDYgiIogg0I0NiNgiiCDQjQCI3Q2IAAANAIDdDYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
@@ -126,6 +101,31 @@
     "image23": "hwQQABAAAAAAAAAAAACACAAAAAAAjYgAAACICNCNIgAAgt0IiCIiACCCiN2IKCIAIIKN3YgoIogg0t3diCgiiCDS3d2BKCKIIILY2IgoIoAA0o3Y0C0CAAAC3djdDQAAAALdCNAAAAAAANAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
     "image24": "hwQQABAAAAAAgIgAiCgAACDYjYCIiAIAIojYjYiIKIgi2NgtKNgtiCLd3Y0i0i2IIt3djdLSgggiiI2NKCKCCCDdiA0oIoIIINCNDdAiAAgg0I0AAAAAAAAADQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
     "image25": "hwQQABAAAAAAAAAA3QAAAAAAAADdAIAIAAAAgNgAgogAgIiACCAiiCDYjYCIIiKAIojYjYgiIgAi2NgtIiIiACLd3S3SIgIAIt3djSIiAgAiiI2NKCIiACDdiA0oIiIAINCNDYggIgAg0I0AjYCIAAAADQDdiIgAAAAAAN0AAAAAAAAAAAAAAA==",
+    "image50": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAA//////////93d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3dmZmZmZmZmZmZmZmZmZmZmd3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d2ZmZmZmZmZmd3d3d3d3d3d3d3d3d3d3dw==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "pipeBottomLeft"
+    },
+    "image51": {
+        "data": "hwQQABAAAABmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZ2dnZ2dnZ2d2dnZ2dnZ2dmdnZ2dnZ2dnd3d3d3d3d3d3d3d3d3d3d///////////AAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "pipeBottomRight"
+    },
+    "image52": {
+        "data": "hwQQABAAAAD//////////392d3d3d3f/f3Z3d3d3d/9/dnd3d3d3/39mZmZmZmb/f2ZmZmZmZv9/d3d3d3d3/393d3d3d3f/f3d3d3d3d/9/d3d3d3d3/393d3d3d3f/f2ZmZmZmZv9/dnd3d3d3/392d3d3d3f/f2ZmZmZmZv9/ZmZmZmZm/w==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "pipeTopLeft"
+    },
+    "image53": {
+        "data": "hwQQABAAAAB/ZmZmZmZm/39mZmZmZmb/f2ZmZmZmZv9/ZmZmZmZm/39mZmZmZmb/f2ZmZmZmZv9/ZmZmZmZm/39mZmZmZmb/f2ZmZmZmZv9/dnZ2dnZ2/39mZ2dnZ2f/f3Z2dnZ2dv9/ZmdnZ2dn/392d3d3d3f/f3Z3d3d3dwD/////////AA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "pipeTopRight"
+    },
+    "image44": {
+        "data": "hwQQABAAAAAAAABEREQAAAAAQCJCJAAAAAAkIiIkAAAAQCQiIiQRAQBEJCIiFBERQEREIkIUERFERERERBQREUREREREFBERRCJCREQUEREkIkJERBQRQSAiQkREFEEUACJCREQUEREAIEIkQiQRAQAARCQiJAAAAABARCJEAAAAAABARAQAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "regularMushroom"
+    },
     "anim13": {
         "namespace": "myAnimations",
         "id": "anim13",
