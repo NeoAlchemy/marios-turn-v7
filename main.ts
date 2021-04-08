@@ -53,6 +53,7 @@ scene.onHitWall(SpriteKind.Player, function (sprite, location) {
                 false
                 )
                 tiles.placeOnTile(brickBlockExploding, tiles.getTileLocation(tiles.locationXY(location, tiles.XY.column) - 1, tiles.locationXY(location, tiles.XY.row) - 1))
+                tiles.setWallAt(location, false)
                 tiles.setTileAt(location, assets.tile`transparency16`)
             } else {
                 scene.cameraShake(4, 100)
