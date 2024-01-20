@@ -13,6 +13,7 @@ namespace SpriteKind {
     export const CheapCheap = SpriteKind.create()
     export const brick = SpriteKind.create()
     export const Goomba = SpriteKind.create()
+    export const Text = SpriteKind.create()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`1up`, function (sprite, location) {
     music.magicWand.play()
