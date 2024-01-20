@@ -500,7 +500,7 @@ info.onCountdownEnd(function () {
     resetGame()
 })
 function buildLevel () {
-    mario.setPosition(20, 40)
+    mario.setPosition(19, 40)
     scene.setBackgroundImage(assets.image`backgroundImage1`)
     tiles.setTilemap(tilemap`level7`)
     animateCoins()
